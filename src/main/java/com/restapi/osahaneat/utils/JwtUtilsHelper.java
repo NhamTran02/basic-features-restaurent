@@ -10,6 +10,7 @@ import javax.crypto.SecretKey;
 
 @Component
 public class JwtUtilsHelper {
+//    @Value("${jwt.secret}")
     @Value("${jwt.secret}")
     private String privatekey;
 
