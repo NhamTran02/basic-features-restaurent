@@ -4,6 +4,7 @@ import com.restapi.osahaneat.payload.ResponseData;
 import com.restapi.osahaneat.service.CategoryService;
 import com.restapi.osahaneat.service.impl.CategoryServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,5 +24,11 @@ public class CategoryController {
         ResponseData responseData = new ResponseData();
         responseData.setData(categoryServiceimpl.getCategoryHomePage());
         return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
+    @CacheEvict(value = "categoryHome", allEntries = true)
+    @GetMapping("/clear-cache")
+    public String clearCache(){
+        return "Clear cache success";
     }
 }
